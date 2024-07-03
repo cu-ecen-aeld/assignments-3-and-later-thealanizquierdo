@@ -59,10 +59,7 @@ do
 done
 
 # Run finder script
-OUTPUTSTRING=$(~/assignment-1-thealanizquierdo/finder-app/finder.sh "$WRITEDIR" "$WRITESTR")
-
-# Example: Modify finder-test.sh
-~/assignment-1-thealanizquierdo/finder-app/finder.sh
+OUTPUTSTRING=$(./finder-app/finder.sh "$WRITEDIR" "$WRITESTR")
 
 # remove temporary directories
 rm -rf /tmp/aeld-data
