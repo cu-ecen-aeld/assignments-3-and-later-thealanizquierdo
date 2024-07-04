@@ -6,25 +6,26 @@ set -e
 set -u
 
 NUMFILES=10
-WRITESTR=AELD_IS_FUN
-WRITEDIR=/tmp/aeld-data
+WRITESTR="AELD_IS_FUN"
+WRITEDIR="/tmp/aeld-data"
 username=$(cat conf/username.txt)
 
-if [ $# -lt 3 ]; then
-    echo "Using default value '${WRITESTR}' for string to write"
-    if [ $# -lt 1 ]; then
-        echo "Using default value '${NUMFILES}' for number of files to write"
-    else
-        NUMFILES=$1
-    fi
-else
+if [ $# -ge 1 ]; then
     NUMFILES=$1
+fi
+
+if [ $# -ge 2 ]; then
     WRITESTR=$2
+fi
+
+if [ $# -ge 3 ]; then
     WRITEDIR=$3
 fi
 
 MATCHSTR="The number of files are ${NUMFILES} and the number of matching lines are ${NUMFILES}"
 
+echo "Using '${WRITESTR}' for string to write"
+echo "Using '${NUMFILES}' for number of files to write"
 echo "Writing ${NUMFILES} files containing string '${WRITESTR}' to '${WRITEDIR}'"
 
 # Clean previous build artifacts
@@ -57,23 +58,24 @@ write_files() {
 # Call the function to write files
 write_files "${NUMFILES}" "${WRITESTR}" "${WRITEDIR}"
 
-# Uncomment the find_files function and its call once implemented
 # Function to find files
-# find_files() {
-#     local find_dir="$1"
-#     local find_str="$2"
+find_files() {
+    local find_dir="$1"
+    local find_str="$2"
 
-#     # Example logic to find files
-#     # Replace with your actual implementation
-#     for file in "${find_dir}"/*; do
-#         if [ -f "$file" ]; then
-#             grep -q "${find_str}" "$file" && echo "$file"
-#         fi
-#     done
-# }
+    echo "Searching for '${find_str}' in files under '${find_dir}'"
+
+    # Example logic to find files containing the string
+    # Replace with your actual implementation
+    for file in "${find_dir}"/*; do
+        if [ -f "$file" ]; then
+            grep -q "${find_str}" "$file" && echo "$file"
+        fi
+    done
+}
 
 # Call the function to find files
-# find_files "${WRITEDIR}" "${WRITESTR}"
+find_files "${WRITEDIR}" "${WRITESTR}"
 
 # Example output check (commented out for now)
 # set +e
@@ -87,3 +89,4 @@ write_files "${NUMFILES}" "${WRITESTR}" "${WRITEDIR}"
 #     echo "${OUTPUTSTRING}"
 #     exit 1
 # fi
+
