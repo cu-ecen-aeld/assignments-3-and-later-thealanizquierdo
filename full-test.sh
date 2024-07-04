@@ -50,3 +50,5 @@ else
     exit 1
 fi
 exit ${unit_test_rc}
+echo "Success"
+exit 0
