@@ -47,10 +47,10 @@ then
 fi
 
 # Clean previous build artifacts
-make clean
+# make clean
 
 # Compile writer using native compilation
-make
+# make
 
 # Write files using writer application
 for i in $(seq 1 $NUMFILES)
